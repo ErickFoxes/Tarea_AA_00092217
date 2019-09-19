@@ -1,4 +1,5 @@
 // No entendí bien lo que pedia :s
+// El Heapsort use el que nos diste (no sabia si no lo podiamos usar)
 #include <iostream>
 #include <string>
 #include <cstdlib>
@@ -40,12 +41,6 @@ void BuildMaxHeap(int A[], int size){
     }
 }
 
-void printArray(int A[], int size){
-    for(int i=0; i<size; i++){
-        cout<<(A[i])<<", ";
-    }
-}
-
 int NumeroMultiplo(int N, int multiplo){
 	if(N%multiplo==0){
 		return 1;
@@ -67,16 +62,28 @@ void imprimirMissingNumber(int A[], int N){
 	}else if(NumeroPositivo(A[N-1])==1 && NumeroMultiplo(A[N-1],2)==0){
 		cout<<A[N-1]+1<<endl;
 	}else{
-		cout<<"El numero no es positivo";
+		cout<<2<<endl;
 	}
 }
+
+//void printArray(int A[], int size){
+//    for(int i=0; i<size; i++){
+//		cout<<A[i]<<", ";
+//    }
+//    cout<<endl;
+//}
 
 int main()
 {
 	int T;
 	cout<<"Cuantos casos deseas realizar? ";
-  	cin>>T;
-  	cout<<endl;
+	cin>>T;
+	while(T<0 || T>10){
+        cout<<"Cuantos casos deseas realizar? ";
+        cin>>T;
+        cout<<endl;
+	}
+  	
 	for(int j=0;j<T;j++){
 		int N,elemento;
 		cout<<"Cuantos numeros habra en el arreglo? ";
@@ -87,7 +94,12 @@ int main()
          for(int x=1; x<=N; x++){
             cout<<"ingrese elemento "<<x<<": ";
 			cin>>elemento;
-			A[x]= elemento;
+			if(elemento<0){
+				cout<<"Numero no valido, ingrese un numero positivo por favor";
+				x--;
+			}else{
+                A[x-1]= elemento;
+			}
 		}
 		int temp=0;
 	    int size = sizeof(A)/sizeof(A[0]);
